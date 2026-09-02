@@ -1,0 +1,33 @@
+# @niwoerner/oxlint-rules
+
+Install and usage: see the [repository README](../../README.md#typescript).
+
+## Rules
+
+### no-use-effect
+
+Preset: `frontend`. Source: [`src/rules/no-use-effect.ts`](src/rules/no-use-effect.ts).
+
+Rejects `useEffect(...)` and any member call ending in `.useEffect(...)`, such as `React.useEffect`. Prefer derived state, event handlers, or the framework's data APIs. Computed access like `obj["useEffect"]` and other hooks such as `useLayoutEffect` are outside the rule.
+
+#### Why
+
+`useEffect` is for external sync, yet it gets used for derived state, fetching, and prop reactions. Those belong in render, the data layer, or the event handler. A ban makes the rare real sync an explicit, justified disable. See [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect).
+
+```tsx
+useEffect(() => sync(value), [value]); // violation
+React.useEffect(() => sync(value), [value]); // violation
+```
+
+## Development
+
+- One rule per file in `src/rules/<name>.ts`, exported as `<camelName>Rule` via `defineRule`, with a `messageId` and `docs.description`.
+- Sibling `<name>.test.ts` using `RuleTester` from `oxlint/plugins-dev`, covering valid and invalid cases.
+- Register the rule in `src/index.ts` and enable it in the preset it belongs to under `src/configs/`.
+- Add a `### <name>` section above and a row in the repository README table linking to it.
+
+```bash
+bun install && bun run test && bun run typecheck && bun run lint
+```
+
+Release: every push to `main` that changes this package publishes the next patch automatically, starting at `0.0.1`. Push a tag `lint-typescript-v<x.y.z>` to release that exact version; automatic patches continue from it. Tags are the version source, `package.json` stays at `0.0.0`.

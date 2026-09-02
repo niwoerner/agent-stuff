@@ -1,0 +1,41 @@
+{
+	"name": "@niwoerner/oxlint-rules",
+	"version": "0.0.0",
+	"description": "Opinionated oxlint rules and presets for TypeScript projects.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/niwoerner/agent-stuff.git",
+		"directory": "lint/typescript"
+	},
+	"files": [
+		"src",
+		"!src/**/*.test.ts"
+	],
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./configs": "./src/configs/index.ts"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"lint": "oxlint --deny-warnings --format=agent && oxfmt --check",
+		"lint:fix": "oxlint --fix && oxfmt",
+		"test": "node --test 'src/**/*.test.ts'",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@oxlint/plugins": "1.81.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.0.0",
+		"oxfmt": "0.66.0",
+		"oxlint": "1.81.0",
+		"typescript": "^5.9.3"
+	},
+	"peerDependencies": {
+		"oxlint": "^1.81.0"
+	}
+}
