@@ -9,20 +9,27 @@
 		"directory": "lint/typescript"
 	},
 	"files": [
-		"src",
-		"!src/**/*.test.ts"
+		"dist"
 	],
 	"type": "module",
 	"exports": {
-		".": "./src/index.ts",
-		"./configs": "./src/configs/index.ts"
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./configs": {
+			"types": "./dist/configs/index.d.ts",
+			"default": "./dist/configs/index.js"
+		}
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
+		"build": "rm -rf dist && tsc -p tsconfig.build.json",
 		"lint": "oxlint --deny-warnings --format=agent && oxfmt --check",
 		"lint:fix": "oxlint --fix && oxfmt",
+		"prepublishOnly": "bun run build",
 		"test": "node --test 'src/**/*.test.ts'",
 		"typecheck": "tsc --noEmit"
 	},
@@ -36,6 +43,7 @@
 		"typescript": "^5.9.3"
 	},
 	"peerDependencies": {
+		"oxfmt": "^0.66.0",
 		"oxlint": "^1.81.0"
 	}
 }

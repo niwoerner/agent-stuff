@@ -2,6 +2,14 @@
 
 Install and usage: see the [repository README](../../README.md#typescript).
 
+## Presets
+
+- `base` — always. Loads the plugin, sets `correctness` to warn and `eslint/no-unused-vars` to error. No ignores: oxlint drops `ignorePatterns` from an extended object, so keep them in the project config.
+- `backend` — server and CLI projects. Nothing beyond `base` yet.
+- `frontend` — React and browser projects. Enables `no-use-effect`.
+- `testing` — overrides for `*.test.ts(x)`. Nothing yet.
+- `fmt` — oxfmt settings: tabs, Markdown ignored. Spread into `oxfmt.config.ts`.
+
 ## Rules
 
 ### no-use-effect
@@ -27,7 +35,9 @@ React.useEffect(() => sync(value), [value]); // violation
 - Add a `### <name>` section above and a row in the repository README table linking to it.
 
 ```bash
-bun install && bun run test && bun run typecheck && bun run lint
+bun install && bun run test && bun run typecheck && bun run build && bun run lint
 ```
+
+The package ships compiled `dist/` (JS + `.d.ts`), not `src/`: Node refuses to strip types from `.ts` files under `node_modules`, and oxfmt loads config imports through Node.
 
 Release: every push to `main` that changes this package publishes the next patch automatically, starting at `0.0.1`. Push a tag `lint-typescript-v<x.y.z>` to release that exact version; automatic patches continue from it. Tags are the version source, `package.json` stays at `0.0.0`.

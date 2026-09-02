@@ -43,8 +43,22 @@ export default defineConfig({
 });
 ```
 
+Formatting shares the same package:
+
+```ts
+// oxfmt.config.ts
+import { defineConfig } from "oxfmt";
+import { fmt } from "@niwoerner/oxlint-rules/configs";
+
+export default defineConfig({ ...fmt, ignorePatterns: [...fmt.ignorePatterns, "**/generated/**"] });
+```
+
 </details>
 
 ## Skills
 
-ToDo
+Agent skills, one directory each under [`skills/`](skills).
+
+| Name          | Details                                  |
+| ------------- | ---------------------------------------- |
+| `code-review` | [here](skills/code-review/SKILL.md)      |

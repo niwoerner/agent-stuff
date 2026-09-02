@@ -73,6 +73,8 @@ jobs:
         if: steps.version.outputs.run == 'true'
       - run: bun run typecheck
         if: steps.version.outputs.run == 'true'
+      - run: bun run build
+        if: steps.version.outputs.run == 'true'
       - run: bun run test
         if: steps.version.outputs.run == 'true'
 
@@ -88,18 +90,18 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Tag
-        if: steps.version.outputs.run == 'true' && steps.published.outputs.skip == 'false' && !startsWith(github.ref, 'refs/tags/')
-        run: |
-          git tag "${{ steps.version.outputs.tag }}"
-          git push origin "refs/tags/${{ steps.version.outputs.tag }}"
-
       - name: Publish to npm
         if: steps.version.outputs.run == 'true' && steps.published.outputs.skip == 'false'
         run: |
           npm version --no-git-tag-version "${{ steps.version.outputs.version }}"
           npm publish --provenance
           npm pack
+
+      - name: Tag
+        if: steps.version.outputs.run == 'true' && steps.published.outputs.skip == 'false' && !startsWith(github.ref, 'refs/tags/')
+        run: |
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "refs/tags/${{ steps.version.outputs.tag }}"
 
       - name: Create or update GitHub release
         if: steps.version.outputs.run == 'true' && steps.published.outputs.skip == 'false'
