@@ -1,6 +1,6 @@
-import { defineConfig } from "oxlint";
+import type { OxlintConfig } from "oxlint";
 
-/** Server/CLI projects. Nothing yet beyond `base`. */
-export const backend = defineConfig({
+/** Server and CLI projects. Nothing yet beyond `base`. */
+export const backend = {
 	rules: {},
-});
+} satisfies OxlintConfig;
