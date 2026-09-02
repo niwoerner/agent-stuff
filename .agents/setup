@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+
+echo "Installing lint/typescript dependencies..."
+start=$SECONDS
+bun install --cwd "$repo_root/lint/typescript" --frozen-lockfile
+echo "Dependencies ready in $((SECONDS - start))s."
