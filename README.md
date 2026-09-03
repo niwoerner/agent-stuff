@@ -10,12 +10,12 @@ Stuff to make agents produce better output.
 
 #### Rules
 
-| Name                                 | Config   | Details                                                             |
-| ------------------------------------ | -------- | ------------------------------------------------------------------- |
-| `no-conditional-object-spread`       | base     | [here](lint/typescript/README.md#no-conditional-object-spread)       |
-| `no-direct-db-operations`            | explicit | [here](lint/typescript/README.md#no-direct-db-operations)            |
-| `no-raw-hono-request-input`          | explicit | [here](lint/typescript/README.md#no-raw-hono-request-input)          |
-| `no-use-effect`                      | frontend | [here](lint/typescript/README.md#no-use-effect)                      |
+| Name                                | Config   | Details                                                             |
+| ----------------------------------- | -------- | ------------------------------------------------------------------- |
+| `no-conditional-object-spread`      | base     | [here](lint/typescript/README.md#no-conditional-object-spread)      |
+| `no-direct-db-operations`           | explicit | [here](lint/typescript/README.md#no-direct-db-operations)           |
+| `no-raw-hono-request-input`         | explicit | [here](lint/typescript/README.md#no-raw-hono-request-input)         |
+| `no-use-effect`                     | frontend | [here](lint/typescript/README.md#no-use-effect)                     |
 | `static-hono-routes-before-dynamic` | explicit | [here](lint/typescript/README.md#static-hono-routes-before-dynamic) |
 
 <details>
@@ -63,6 +63,6 @@ export default defineConfig({ ...fmt, ignorePatterns: [...fmt.ignorePatterns, "*
 
 Agent skills, one directory each under [`skills/`](skills).
 
-| Name          | Details                                  |
-| ------------- | ---------------------------------------- |
-| `code-review` | [here](skills/code-review/SKILL.md)      |
+| Name          | Details                             |
+| ------------- | ----------------------------------- |
+| `code-review` | [here](skills/code-review/SKILL.md) |
