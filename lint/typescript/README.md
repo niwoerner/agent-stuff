@@ -4,13 +4,32 @@ Install and usage: see the [repository README](../../README.md#typescript).
 
 ## Presets
 
-- `base` — always. Loads the plugin, sets `correctness` to warn and `eslint/no-unused-vars` to error. No ignores: oxlint drops `ignorePatterns` from an extended object, so keep them in the project config.
+- `base` — always. Loads the plugin, enables `no-conditional-object-spread`, sets `correctness` to warn and `eslint/no-unused-vars` to error. No ignores: oxlint drops `ignorePatterns` from an extended object, so keep them in the project config.
 - `backend` — server and CLI projects. Nothing beyond `base` yet.
 - `frontend` — React and browser projects. Enables `no-use-effect`.
 - `testing` — overrides for `*.test.ts(x)`. Nothing yet.
 - `fmt` — oxfmt settings: tabs, Markdown ignored. Spread into `oxfmt.config.ts`.
 
 ## Rules
+
+### no-conditional-object-spread
+
+Preset: `base`. Source: [`src/rules/no-conditional-object-spread.ts`](src/rules/no-conditional-object-spread.ts).
+
+Rejects logical-AND spreads and ternary spreads with an empty object branch in object literals. Assign a possibly undefined property directly when presence does not matter. When the property must be omitted, construct the object first and add the property with an `if`. Array spreads and unconditional object spreads are outside the rule.
+
+#### Why
+
+Conditional object spreads hide whether a property is absent or present with an undefined value. They also make object construction harder to read and type-check. Explicit assignment keeps the value visible; an `if` makes intentional omission visible.
+
+```ts
+const options = { ...(timeout !== undefined && { timeout }) }; // violation
+const result = { ...(title === undefined ? {} : { title }) }; // violation
+
+const options = { timeout };
+const result: { title?: string } = {};
+if (title !== undefined) result.title = title;
+```
 
 ### no-use-effect
 

@@ -10,9 +10,10 @@ Stuff to make agents produce better output.
 
 #### Rules
 
-| Name            | Config   | Details                                            |
-| --------------- | -------- | -------------------------------------------------- |
-| `no-use-effect` | frontend | [here](lint/typescript/README.md#no-use-effect) |
+| Name                           | Config   | Details                                                       |
+| ------------------------------ | -------- | ------------------------------------------------------------- |
+| `no-conditional-object-spread` | base     | [here](lint/typescript/README.md#no-conditional-object-spread) |
+| `no-use-effect`                | frontend | [here](lint/typescript/README.md#no-use-effect)                |
 
 <details>
 <summary><b>Usage</b></summary>

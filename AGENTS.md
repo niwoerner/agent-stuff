@@ -6,5 +6,6 @@
 - Root `README.md` is the user-facing index: rule table and usage. Package READMEs hold rule details only; do not repeat install or usage there.
 - `lint/*/dist/` is build output, never committed. Package `exports` point at `dist`; run `bun run build` before testing consumption.
 - Keep rules generic. No project-specific names, paths, or exceptions.
+- Keep lint errors agent-friendly and token-efficient: state the violation and fix concisely.
 - Run the package's `bun run lint && bun run typecheck && bun run test` before committing.
 - Keep READMEs, rule docs, and comments concise. State the what and the why, skip the rest.

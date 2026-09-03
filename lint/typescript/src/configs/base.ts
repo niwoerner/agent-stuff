@@ -8,5 +8,8 @@ import type { OxlintConfig } from "oxlint";
 export const base = {
 	jsPlugins: ["@niwoerner/oxlint-rules"],
 	categories: { correctness: "warn" },
-	rules: { "eslint/no-unused-vars": "error" },
+	rules: {
+		"eslint/no-unused-vars": "error",
+		"niwoerner/no-conditional-object-spread": "error",
+	},
 } satisfies OxlintConfig;
