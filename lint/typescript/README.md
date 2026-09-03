@@ -31,6 +31,29 @@ const result: { title?: string } = {};
 if (title !== undefined) result.title = title;
 ```
 
+### no-direct-db-operations
+
+Preset: none; enable it in an override for route-handler files. Source: [`src/rules/no-direct-db-operations.ts`](src/rules/no-direct-db-operations.ts).
+
+Rejects direct `.select()`, `.insert()`, `.update()`, `.delete()`, `.execute()`, and `.transaction()` calls on identifiers named `db` or `tx`. Calls to imported database-layer functions and operations on other receivers remain valid. The rule applies to the whole file selected by the consumer; it does not infer which functions are route handlers.
+
+```ts
+app.get("/:id", () => db.select().from(users)); // violation
+app.get("/:id", (c) => getUser(db, c.req.valid("param").id));
+```
+
+### no-raw-hono-request-input
+
+Preset: none; enable explicitly for Hono projects. Source: [`src/rules/no-raw-hono-request-input.ts`](src/rules/no-raw-hono-request-input.ts).
+
+Rejects `.json()`, `.param()`, `.query()`, and `.queries()` on the direct `<identifier>.req` member chain. Consume validator-produced input through `.req.valid(...)`. `.parseBody()` remains valid for explicit multipart parsing. Computed and deeper member chains are outside the rule to avoid matching unrelated APIs.
+
+```ts
+const body = await c.req.json(); // violation
+const body = c.req.valid("json");
+const form = await c.req.parseBody();
+```
+
 ### no-use-effect
 
 Preset: `frontend`. Source: [`src/rules/no-use-effect.ts`](src/rules/no-use-effect.ts).
@@ -46,11 +69,27 @@ useEffect(() => sync(value), [value]); // violation
 React.useEffect(() => sync(value), [value]); // violation
 ```
 
+### static-hono-routes-before-dynamic
+
+Preset: none; enable explicitly for Hono projects. Source: [`src/rules/static-hono-routes-before-dynamic.ts`](src/rules/static-hono-routes-before-dynamic.ts).
+
+Reports an earlier parameter or wildcard path when a later static string path on the same router, HTTP method, and lexical registration scope would match it. It supports simple and optional parameter segments plus Hono `*` wildcards for `.get()`, `.post()`, `.put()`, `.delete()`, `.patch()`, `.options()`, and `.head()` calls, including fluent chains.
+
+Template paths, regexp parameters, `createRoute(...)` definitions, `.on()`/`.all()`, aliases, and cross-file ordering are deliberately outside the rule. A `createRoute(...)` declaration does not prove where its route is registered, so checking declaration order would be unreliable.
+
+```ts
+app.get("/:id", handler);
+app.get("/settings", settingsHandler); // `/settings` is shadowed
+
+app.get("/settings", settingsHandler);
+app.get("/:id", handler);
+```
+
 ## Development
 
 - One rule per file in `src/rules/<name>.ts`, exported as `<camelName>Rule` via `defineRule`, with a `messageId` and `docs.description`.
 - Sibling `<name>.test.ts` using `RuleTester` from `oxlint/plugins-dev`, covering valid and invalid cases.
-- Register the rule in `src/index.ts` and enable it in the preset it belongs to under `src/configs/`.
+- Register the rule in `src/index.ts`. Enable it in a matching preset, or leave stack- and file-specific rules explicit.
 - Add a `### <name>` section above and a row in the repository README table linking to it.
 
 ```bash
