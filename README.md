@@ -14,9 +14,9 @@ Stuff to make agents produce better output.
 | ----------------------------------- | -------- | ------------------------------------------------------------------- |
 | `no-conditional-object-spread`      | base     | [here](lint/typescript/README.md#no-conditional-object-spread)      |
 | `no-direct-db-operations`           | explicit | [here](lint/typescript/README.md#no-direct-db-operations)           |
-| `no-raw-hono-request-input`         | explicit | [here](lint/typescript/README.md#no-raw-hono-request-input)         |
+| `no-raw-hono-request-input`         | backend  | [here](lint/typescript/README.md#no-raw-hono-request-input)         |
 | `no-use-effect`                     | frontend | [here](lint/typescript/README.md#no-use-effect)                     |
-| `static-hono-routes-before-dynamic` | explicit | [here](lint/typescript/README.md#static-hono-routes-before-dynamic) |
+| `static-hono-routes-before-dynamic` | backend  | [here](lint/typescript/README.md#static-hono-routes-before-dynamic) |
 
 <details>
 <summary><b>Usage</b></summary>

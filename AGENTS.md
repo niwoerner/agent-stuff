@@ -7,5 +7,6 @@
 - `lint/*/dist/` is build output, never committed. Package `exports` point at `dist`; run `bun run build` before testing consumption.
 - Keep rules generic. No project-specific names, paths, or exceptions.
 - Keep lint errors agent-friendly and token-efficient: state the violation and fix concisely.
+- Enabling or introducing a lint rule does not authorize changing consumer or product code to clear findings; get explicit user approval before applying those fixes.
 - Run the package's `bun run lint && bun run typecheck && bun run test` before committing.
 - Keep READMEs, rule docs, and comments concise. State the what and the why, skip the rest.
