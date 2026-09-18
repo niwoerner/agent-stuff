@@ -2,6 +2,7 @@ import { eslintCompatPlugin } from "@oxlint/plugins";
 
 import { noConditionalObjectSpreadRule } from "./rules/no-conditional-object-spread.ts";
 import { noDirectDbOperationsRule } from "./rules/no-direct-db-operations.ts";
+import { noRawErrorMessageRule } from "./rules/no-raw-error-message.ts";
 import { noRawHonoRequestInputRule } from "./rules/no-raw-hono-request-input.ts";
 import { noUseEffectRule } from "./rules/no-use-effect.ts";
 import { staticHonoRoutesBeforeDynamicRule } from "./rules/static-hono-routes-before-dynamic.ts";
@@ -12,6 +13,7 @@ const plugin = eslintCompatPlugin({
 	rules: {
 		"no-conditional-object-spread": noConditionalObjectSpreadRule,
 		"no-direct-db-operations": noDirectDbOperationsRule,
+		"no-raw-error-message": noRawErrorMessageRule,
 		"no-raw-hono-request-input": noRawHonoRequestInputRule,
 		"no-use-effect": noUseEffectRule,
 		"static-hono-routes-before-dynamic": staticHonoRoutesBeforeDynamicRule,
