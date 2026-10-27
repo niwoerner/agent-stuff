@@ -71,6 +71,14 @@ Agent skills, one directory each under [`skills/`](skills).
 | `monitor-pr` | [here](skills/monitor-pr/SKILL.md) |
 | `reviewing-code` | [here](skills/reviewing-code/SKILL.md) |
 
+```bash
+npx skills add niwoerner/agent-stuff
+```
+
+Choose the skills and agents to install to; add `-g` to install globally.
+
+### Credits
+
 `filing-pr` was copied from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
 by Theo Browne, with the follow-up PR comment instruction removed.
 
