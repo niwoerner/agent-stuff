@@ -67,3 +67,13 @@ Agent skills, one directory each under [`skills/`](skills).
 | Name          | Details                             |
 | ------------- | ----------------------------------- |
 | `code-review` | [here](skills/code-review/SKILL.md) |
+| `filing-pr` | [here](skills/filing-pr/SKILL.md) |
+| `monitor-pr` | [here](skills/monitor-pr/SKILL.md) |
+| `reviewing-code` | [here](skills/reviewing-code/SKILL.md) |
+
+`filing-pr` was copied from [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
+by Theo Browne, with the follow-up PR comment instruction removed.
+
+`monitor-pr` was inspired by the [babysit-pr skill in t3dotgg/tstack](https://github.com/t3dotgg/tstack/tree/main/skills/babysit-pr).
+`reviewing-code` incorporates review criteria from our `code-review` skill and
+[`deslop` prompt](prompts/deslop.md), which credits [earendil-works/pi](https://github.com/earendil-works/pi).
